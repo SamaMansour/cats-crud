@@ -1,38 +1,21 @@
-/* eslint-disable */
-// screens/ListCatsScreen.js
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+// Assuming you're using @react-navigation/stack
+/* eslint-disable */ 
+import { createStackNavigator } from '@react-navigation/stack';
+import CreateCatScreen from '../../screens/CreateCat/CreateCat';
+import ListCatsScreen from '../../screens/ListCats/ListCats';
+import EditCatScreen from '../../screens/EditCat/EditCat';
 
-const ListCatsScreen = ({ route }) => {
-  const { cats } = route.params;
+const Stack = createStackNavigator();
 
+const AppNavigator = () => {
   return (
-    <View style={styles.container}>
-      <FlatList 
-        data={cats}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.listItem}>
-            <Text>Name: {item.name}</Text>
-            <Text>Breed: {item.breed}</Text>
-            <Text>Description: {item.description}</Text>
-          </View>
-        )}
-      />
-    </View>
+    <Stack.Navigator initialRouteName="CreateCat">
+      <Stack.Screen name="CreateCat" component={CreateCatScreen} />
+      <Stack.Screen name="ListCats" component={ListCatsScreen} />
+      <Stack.Screen name="EditCat" component={EditCatScreen} />
+
+    </Stack.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  listItem: {
-    padding: 15,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
-  }
-});
-
-export default ListCatsScreen;
+export default AppNavigator;
